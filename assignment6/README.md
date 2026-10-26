@@ -1,16 +1,23 @@
-# React + Vite
+# Assignment 6 - Post Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+## File Organization
 
-Currently, two official plugins are available:
+- `src/api/postsApi.js`: data-fetching only (`fetchPosts`), no React or JSX.
+- `src/reducer/postsReducer.js`: pure reducer and initial state for async state.
+- `src/components/Post.jsx`: presentational component for a single post.
+- `src/components/PostList.jsx`: renders the list with `.map()` and stable keys.
+- `src/components/FilterForm.jsx`: controlled input for filtering by title.
+- `src/App.jsx`: owns state (`useReducer` + filter `useState`) and fetches on mount.
+- `src/main.jsx`: app entry point.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Challenges
 
-## React Compiler
+- Cleaning up the fetch in `useEffect` with `AbortController` so no state
+  update happens after unmount (also handles StrictMode's double mount).
+- Keeping filtering as derived state instead of storing filtered posts.
+- Handling loading, error, and empty states separately.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Run
 
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+npm install
+npm run dev
